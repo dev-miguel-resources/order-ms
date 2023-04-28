@@ -1,4 +1,8 @@
 import express, { Application } from "express";
+import { OrderInfraestructure } from "./module/infraestructure/order.infraestructure";
+import { OrderApplication } from "./module/application/order.application";
+import Controller from "./module/interface/http/order.controller";
+import OrderRouter from "./module/interface/http/router";
 
 class App {
   private readonly expressApp: Application;
@@ -15,7 +19,14 @@ class App {
   }
 
   mountRoutes() {
+
+    const infraestructure = new OrderInfraestructure();
+    const application = new OrderApplication(infraestructure);
+    const controller = new Controller(application);
+    const router = new OrderRouter(controller);
+
     // design pattern Chain of Responsability: https://refactoring.guru/es/design-patterns/chain-of-responsibility
+    this.expressApp.use("/order", router.router);
     this.expressApp.use("/", (_req, res) => res.send("All is OK"));
   }
 

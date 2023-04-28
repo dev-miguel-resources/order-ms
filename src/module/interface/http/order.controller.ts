@@ -5,7 +5,7 @@ import { OrderFactory } from "../../domain/order.factory";
 export default class {
   constructor(private readonly app: OrderApplication) {
     
-    // próxima clase revisar el patrón de diseño mediador para el bind
+    // design pattern Mediator: https://refactoring.guru/es/design-patterns/mediator
     this.insertOrder = this.insertOrder.bind(this);
   }
 
