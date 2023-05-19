@@ -21,7 +21,7 @@ class App {
   mountRoutes() {
 
     const infraestructure = new OrderInfraestructure();
-    const application = new OrderApplication(infraestructure);
+    const application = new OrderApplication(infraestructure); // pendiente de agregar el broker
     const controller = new Controller(application);
     const router = new OrderRouter(controller);
 
